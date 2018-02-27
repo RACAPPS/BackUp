@@ -177,8 +177,8 @@ def ftpDelete(ftp, path, ftppreArr, whereArr, ftptrash):
     serverLocation = ''
     for idx, localPath in enumerate(whereArr):
         if localPath in path:
-            serverLocation = parseTilde(path.replace(localPath, ftppreArr[idx]))
-            serverTrash = parseTilde(path.replace(localPath, ftptrash))
+            serverLocation = path.replace(localPath, parseTilde(ftppreArr[idx]))
+            serverTrash = path.replace(localPath, parseTilde(ftptrash))
             break
     mkdRecursive(ftp, serverTrash.replace(serverTrash.split('/')[-1], '').rstrip('/'))
     try:
