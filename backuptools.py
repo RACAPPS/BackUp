@@ -194,7 +194,9 @@ def ftpDelete(ftp, path, ftppreArr, whereArr, ftptrash):
 
 
 def dbUpdate(db, path, md5, action):
-    path = parseTilde(path).replace('\'', '\\\'')
+    if not action == 'delete':
+        path = parseTilde(path)
+    path = path.replace('\'', '\\\'')
     cursor = db.cursor()
     if action == 'create':
         sql = "INSERT INTO REFERENCESR(PATH, HASH) VALUES ('" + path + "', '" + md5 + "')"
